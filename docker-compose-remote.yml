@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       - ALLOWED_HOSTS=backend,cool-vm
-      - CISO_ASSISTANT_URL=https://cool-vm:8443
+      - CISO_ASSISTANT_URL=https://ciso.cloud.widedata.host:8443
       - DJANGO_DEBUG=True
       - AUTH_TOKEN_TTL=7200
     volumes:
@@ -17,7 +17,7 @@ services:
     container_name: frontend
     environment:
       - PUBLIC_BACKEND_API_URL=http://backend:8000/api
-      - PUBLIC_BACKEND_API_EXPOSED_URL=https://cool-vm:8443/api
+      - PUBLIC_BACKEND_API_EXPOSED_URL=https://ciso.cloud.widedata.host:8443/api
       - PROTOCOL_HEADER=x-forwarded-proto
       - HOST_HEADER=x-forwarded-host
 
@@ -29,7 +29,7 @@ services:
     container_name: caddy
     image: caddy:2.7.6
     environment:
-      - CISO_ASSISTANT_URL=https://cool-vm:8443
+      - CISO_ASSISTANT_URL=https://ciso.cloud.widedata.host:8443
     depends_on:
       - frontend
     restart: unless-stopped
